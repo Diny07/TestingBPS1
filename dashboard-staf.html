@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Staf - PRIT-KOTAS BPS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-fade">
+
+  <!-- Navigasi Dashboard -->
+  <nav class="navbar-desain">
+    <div class="navbar-brand">
+      <img src="logo.png" alt="Logo BPS" onerror="this.style.display='none';">
+      <div class="navbar-brand-text">
+        <h3>PRIT-KOTAS</h3>
+        <span>Panel Pengelola Internal</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <span style="font-size: 0.9rem; font-weight: 500; color: var(--teks-muted);">Halo, <strong style="color: var(--teks-gelap);">Staf Admin</strong></span>
+      <a href="antigratifikasi.html" class="btn-outline" style="font-size: 0.85rem; padding: 0.5rem 1rem;"><i class="fa-solid fa-gift"></i> Anti Gratifikasi</a>
+      <a href="input-manual.html" class="btn-primary" style="font-size: 0.85rem; padding: 0.5rem 1rem;"><i class="fa-solid fa-plus"></i> Pengaduan Offline</a>
+      <button class="btn-logout" id="btnLogout">Keluar Sistem</button>
+    </div>
+  </nav>
+
+  <!-- Konten Utama Dasbor -->
+  <main class="dashboard-container">
+
+    <div style="margin-bottom: 1.6rem;">
+      <h1 style="font-size: 1.8rem; margin: 0 0 0.4rem 0;">Dashboard Laporan</h1>
+      <p style="color: var(--teks-muted); font-size: 0.95rem; margin: 0;">
+        Kelola, verifikasi, dan perbarui status laporan pengaduan serta saran masyarakat secara terpusat dan transparan.
+      </p>
+    </div>
+
+    <!-- Ringkasan Statistik -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div>
+          <h3>Menunggu</h3>
+          <p class="number" id="pendingCount" style="color: var(--jingga-proses);">0</p>
+        </div>
+        <span class="stat-icon"><i class="fa-solid fa-hourglass-half"></i></span>
+      </div>
+      <div class="stat-card">
+        <div>
+          <h3>Diproses</h3>
+          <p class="number" id="processCount" style="color: var(--biru-proses);">0</p>
+        </div>
+        <span class="stat-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+      </div>
+      <div class="stat-card">
+        <div>
+          <h3>Selesai</h3>
+          <p class="number" id="doneCount" style="color: var(--hijau-sukses);">0</p>
+        </div>
+        <span class="stat-icon"><i class="fa-solid fa-circle-check"></i></span>
+      </div>
+    </div>
+
+    <!-- Grafik Tren & Statistik Kategori -->
+    <div class="panel-grid">
+      <div class="panel-card">
+        <h3>
+          <span>Tren Laporan (6 Bulan Terakhir)</span>
+          <span class="chart-legend">
+            <span><span class="dot dot-masuk"></span>Masuk</span>
+            <span><span class="dot dot-selesai"></span>Selesai</span>
+          </span>
+        </h3>
+        <div class="bar-chart" id="trendChart"></div>
+        <div class="bar-chart-labels" id="trendChartLabels"></div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:1.5rem;">
+        <div class="panel-card">
+          <h3>Statistik Kategori</h3>
+          <div id="categoryStats"></div>
+        </div>
+        <div class="panel-card">
+          <h3>Sumber Laporan</h3>
+          <div id="sourceStats"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Pencarian -->
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="Semua">Semua <span id="totalCount">0</span></button>
+        <button class="filter-tab" data-filter="Menunggu">Menunggu</button>
+        <button class="filter-tab" data-filter="Diproses">Diproses</button>
+        <button class="filter-tab" data-filter="Selesai">Selesai</button>
+      </div>
+      <div class="search-box">
+        <span><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" id="searchReport" placeholder="Cari nama atau email pelapor">
+      </div>
+    </div>
+
+    <!-- Daftar Laporan (FIFO) -->
+    <div id="reportListBody">
+      <div class="skeleton" style="height: 130px; margin-bottom: 1rem;"></div>
+      <div class="skeleton" style="height: 130px;"></div>
+    </div>
+
+    <!-- Panel Saran & Masukan -->
+    <div class="saran-panel" style="margin-top: 1.6rem;">
+      <div class="saran-panel-header" id="saranPanelHeader">
+        <h3><i class="fa-solid fa-comment-dots"></i> Saran & Masukan <span class="badge-count" id="saranCount">0 baru</span></h3>
+        <span class="chev" style="transition: transform 0.25s var(--ease); color: var(--merah-utama); font-weight:700;">▾</span>
+      </div>
+      <div class="saran-panel-body" id="saranPanelBody">
+        <div id="saranList"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer-desain footer-desain-center">
+    &copy; 2026 BPS Kota Tasikmalaya. Sistem Pengaduan Pelanggaran (PRIT-KOTAS).
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>

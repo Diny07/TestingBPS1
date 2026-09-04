@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Anti-Gratifikasi | PRIT KOTAS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="auth.css">
+<link rel="stylesheet" href="pengaduan.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="dashboard-staf.html" class="navbar__brand" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+    <span class="logo-dot"></span> PRIT KOTAS
+    <span class="badge-sumber badge-sumber--manual" style="margin-left:4px;">Admin Portal</span>
+  </a>
+  <div class="navbar__user">
+    <span id="namaUser">Memuat...</span>
+    <a href="dashboard-staf.html" class="btn btn--ghost btn--sm">← Dashboard</a>
+    <a href="#" id="btnLogout" class="btn btn--ghost btn--sm">Keluar</a>
+  </div>
+</nav>
+
+<main class="section container" style="max-width:760px;">
+
+  <div id="viewForm">
+    <span class="badge-sumber badge-sumber--manual" style="margin-bottom:14px;">🎁 Laporan Anti-Gratifikasi</span>
+    <h1 style="margin-bottom:10px;">Laporan Penerimaan Gratifikasi</h1>
+    <p class="section-subtitle" style="margin-bottom:28px;">
+      Catat setiap pemberian/hadiah yang diterima oleh pegawai BPS dari pihak luar, sesuai ketentuan pengendalian gratifikasi.
+    </p>
+
+    <div id="alertForm" class="alert" style="margin-bottom:16px;"></div>
+
+    <form id="formGratifikasi" style="display:flex; flex-direction:column; gap:20px;">
+
+      <section class="card form-section">
+        <h2 class="form-section__title">1. Data Pemberi</h2>
+        <hr class="form-section__divider">
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label for="namaPemberi">Nama Pemberi *</label>
+            <input type="text" id="namaPemberi" required placeholder="Nama pihak yang memberikan">
+          </div>
+          <div class="form-group">
+            <label for="instansiPemberi">Instansi/Lembaga Pemberi *</label>
+            <input type="text" id="instansiPemberi" required placeholder="Asal instansi/lembaga pemberi">
+          </div>
+        </div>
+        <small>Timestamp dicatat otomatis oleh sistem saat laporan disimpan.</small>
+      </section>
+
+      <section class="card form-section">
+        <h2 class="form-section__title">2. Pemberian dalam Bentuk Apa?</h2>
+        <p class="form-section__desc">Boleh diisi lebih dari 1 kali jika terdapat beberapa jenis pemberian.</p>
+        <hr class="form-section__divider">
+
+        <div id="daftarBentukPemberian" style="display:flex; flex-direction:column; gap:10px;"></div>
+        <button type="button" id="btnTambahBentuk" class="btn btn--ghost btn--sm" style="margin-top:12px;">+ Tambah Bentuk Pemberian</button>
+      </section>
+
+      <section class="card form-section">
+        <h2 class="form-section__title">3. Foto Barang yang Diberikan</h2>
+        <hr class="form-section__divider">
+
+        <label class="dropzone">
+          <input type="file" id="fotoBarang" multiple accept="image/*">
+          <div class="dropzone__ikon">📷</div>
+          <div class="dropzone__judul">Unggah Foto Barang</div>
+          <div class="dropzone__sub">Maksimal 10 foto, 10MB per foto</div>
+        </label>
+        <div id="daftarFileTerpilih" class="daftar-file"></div>
+      </section>
+
+      <section class="card form-section">
+        <h2 class="form-section__title">4. Alasan Penerimaan</h2>
+        <hr class="form-section__divider">
+
+        <div class="form-group">
+          <label for="alasanPenerimaan">Alasan pemberian tersebut diterima oleh pegawai? *</label>
+          <textarea id="alasanPenerimaan" rows="4" required placeholder="Jelaskan konteks/alasan mengapa pemberian ini diterima..."></textarea>
+        </div>
+      </section>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <a href="dashboard-staf.html" class="btn btn--ghost">Batal</a>
+        <button type="submit" id="btnSubmit" class="btn btn--primary">💾 Simpan Laporan</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="viewHasil" class="card" style="display:none; text-align:center; max-width:560px; margin:40px auto;">
+    <div class="ikon-sukses">✅</div>
+    <h2>Laporan Gratifikasi Tersimpan</h2>
+    <p class="subjudul-form">Data telah tercatat dan dapat dilihat oleh pihak berwenang di sistem.</p>
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <button id="btnInputLagi" class="btn btn--ghost btn--full">Input Laporan Lain</button>
+      <a href="dashboard-staf.html" class="btn btn--primary btn--full">Ke Dashboard</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer--lengkap">
+  <div class="container">
+    <div class="footer__copy">&copy; 2026 Badan Pusat Statistik Kota Tasikmalaya.</div>
+  </div>
+</footer>
+
+<script type="module">
+  import { proteksiHalamanStaf, logout } from "./auth.js";
+  import { ajukanLaporanGratifikasi } from "./pengaduan.js";
+  import { tampilkanAlert, sembunyikanAlert, pasangTombolLogout } from "./main.js";
+
+  let namaStafAktif = "";
+  proteksiHalamanStaf((user, profil) => {
+    document.getElementById("namaUser").textContent = `👤 Halo, ${profil.nama}`;
+    namaStafAktif = profil.nama;
+  });
+
+  // Bentuk Pemberian: bisa ditambah lebih dari 1 baris
+  const daftarBentukEl = document.getElementById("daftarBentukPemberian");
+  function tambahBarisBentuk() {
+    const baris = document.createElement("div");
+    baris.style.display = "flex";
+    baris.style.gap = "8px";
+    baris.innerHTML = `
+      <input type="text" class="input-bentuk-pemberian" placeholder="mis. Uang, Barang Elektronik, Voucher..." style="flex:1; padding:11px 14px; border-radius:10px; border:1.5px solid var(--garis); font-size:0.9rem;">
+      <button type="button" class="btn btn--ghost btn--sm btn-hapus-baris">✕</button>
+    `;
+    baris.querySelector(".btn-hapus-baris").addEventListener("click", () => {
+      if (daftarBentukEl.children.length > 1) baris.remove();
+    });
+    daftarBentukEl.appendChild(baris);
+  }
+  tambahBarisBentuk();
+  document.getElementById("btnTambahBentuk").addEventListener("click", tambahBarisBentuk);
+
+  // Preview foto
+  const inputFoto = document.getElementById("fotoBarang");
+  const daftarFileEl = document.getElementById("daftarFileTerpilih");
+  inputFoto.addEventListener("change", () => {
+    const files = Array.from(inputFoto.files);
+    daftarFileEl.innerHTML = files.map(f => `<div class="daftar-file__item">📎 ${f.name} (${(f.size/1024/1024).toFixed(2)} MB)</div>`).join("");
+  });
+
+  const form = document.getElementById("formGratifikasi");
+  const btnSubmit = document.getElementById("btnSubmit");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    sembunyikanAlert("alertForm");
+
+    const bentukPemberian = Array.from(document.querySelectorAll(".input-bentuk-pemberian"))
+      .map((el) => el.value.trim())
+      .filter((v) => v.length > 0);
+    const files = Array.from(inputFoto.files);
+
+    if (bentukPemberian.length === 0) {
+      tampilkanAlert("alertForm", "Mohon isi minimal 1 bentuk pemberian.", "error");
+      return;
+    }
+    if (files.length > 10 || files.some(f => f.size > 10 * 1024 * 1024)) {
+      tampilkanAlert("alertForm", "Maksimal 10 foto, masing-masing maksimal 10 MB.", "error");
+      return;
+    }
+
+    btnSubmit.disabled = true;
+    btnSubmit.textContent = "Menyimpan...";
+
+    try {
+      await ajukanLaporanGratifikasi({
+        namaPemberi: document.getElementById("namaPemberi").value,
+        instansiPemberi: document.getElementById("instansiPemberi").value,
+        bentukPemberian,
+        alasanPenerimaan: document.getElementById("alasanPenerimaan").value
+      }, files, namaStafAktif);
+
+      document.getElementById("viewForm").style.display = "none";
+      document.getElementById("viewHasil").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error(err);
+      tampilkanAlert("alertForm", "Gagal menyimpan laporan. Coba lagi.", "error");
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = "💾 Simpan Laporan";
+    }
+  });
+
+  document.getElementById("btnInputLagi").addEventListener("click", () => {
+    form.reset();
+    daftarBentukEl.innerHTML = "";
+    tambahBarisBentuk();
+    daftarFileEl.innerHTML = "";
+    document.getElementById("viewHasil").style.display = "none";
+    document.getElementById("viewForm").style.display = "block";
+  });
+
+  pasangTombolLogout(logout);
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+/* ===========================================================
+   PRIT KOTAS — dashboard.css
+   Styling untuk dashboard warga & staf, daftar pengaduan, form
+   =========================================================== */
+
+.dashboard-header {
+  padding: 32px 0 20px;
+}
+.dashboard-header h1 { font-size: 1.6rem; }
+.dashboard-header p { color: var(--teks-muted); margin-top: 4px; }
+
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-group { display: flex; gap: 8px; }
+.filter-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--garis);
+  background: var(--putih);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teks-muted);
+  cursor: pointer;
+}
+.filter-chip.aktif { background: var(--biru-utama); border-color: var(--biru-utama); color: var(--putih); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--putih);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 20px;
+  border-left: 4px solid var(--garis);
+}
+.stat-card .angka { font-family: var(--font-heading); font-size: 1.7rem; font-weight: 700; }
+.stat-card .label { color: var(--teks-muted); font-size: 0.85rem; margin-top: 2px; }
+.stat-card--menunggu { border-left-color: var(--jingga-proses); }
+.stat-card--diproses { border-left-color: var(--biru-utama); }
+.stat-card--selesai { border-left-color: var(--hijau-sukses); }
+
+.pengaduan-list { display: flex; flex-direction: column; gap: 14px; padding-bottom: 40px; }
+
+.pengaduan-card {
+  background: var(--putih);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 22px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.pengaduan-card:hover { box-shadow: var(--shadow-hover); }
+
+.pengaduan-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.pengaduan-card__top h3 { font-size: 1.05rem; }
+.pengaduan-card__meta {
+  display: flex; gap: 14px; margin-top: 8px;
+  font-size: 0.8rem; color: var(--teks-muted); flex-wrap: wrap;
+}
+.pengaduan-card__meta span { display: flex; align-items: center; gap: 5px; }
+.pengaduan-card__desc {
+  margin-top: 12px;
+  color: var(--teks-gelap);
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+.pengaduan-card__aksi {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kategori-tag {
+  background: var(--abu-latar);
+  border: 1px solid var(--garis);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--teks-muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--teks-muted);
+}
+.empty-state .ikon { font-size: 2.4rem; margin-bottom: 10px; }
+
+/* Select status untuk staf */
+.select-status {
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--garis);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--putih);
+}
+
+/* Form pengaduan */
+.form-pengaduan-card { max-width: 640px; margin: 30px auto; }
+
+/* --- Detail pengaduan (cek-status & dashboard staf) --- */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--garis);
+}
+.detail-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--teks-muted);
+  font-weight: 700;
+}
+.detail-isi {
+  margin-top: 4px;
+  font-size: 0.92rem;
+  color: var(--teks-gelap);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+.tanggapan-box {
+  background: var(--hijau-lembut);
+  border: 1px solid rgba(46, 125, 50, 0.25);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--teks-gelap);
+  white-space: pre-wrap;
+}
+
+/* --- Badge sumber input (publik vs input manual admin) --- */
+.badge-sumber {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.badge-sumber--publik { background: var(--biru-lembut); color: var(--biru-utama); }
+.badge-sumber--manual { background: var(--jingga-lembut); color: var(--jingga-proses); }
+
+/* --- Daftar bukti (link file) --- */
+.daftar-bukti { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.daftar-bukti a {
+  background: var(--abu-latar);
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  color: var(--biru-utama);
+  font-weight: 600;
+}
+
+/* --- Grid Insight (chart + statistik) --- */
+.insight-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.insight-card {
+  background: var(--putih);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+}
+.insight-card h3 { font-size: 0.95rem; margin-bottom: 16px; display:flex; align-items:center; justify-content:space-between; }
+.insight-legend { display: flex; gap: 14px; font-size: 0.78rem; font-weight: 600; color: var(--teks-muted); }
+.insight-legend span { display:flex; align-items:center; gap:5px; }
+.dot-legend { width: 9px; height: 9px; border-radius: 50%; display:inline-block; }
+
+/* Bar chart sederhana (tanpa library) */
+.bar-chart { display: flex; align-items: flex-end; gap: 14px; height: 160px; padding-top: 10px; }
+.bar-chart__kolom { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+.bar-chart__batang-wrap { display: flex; gap: 3px; align-items: flex-end; height: 130px; }
+.bar-chart__batang { width: 10px; border-radius: 3px 3px 0 0; transition: height 0.3s ease; }
+.bar-chart__label { font-size: 0.72rem; color: var(--teks-muted); font-weight: 600; }
+
+/* Progress bar statistik kategori */
+.progress-item { margin-bottom: 14px; }
+.progress-item:last-child { margin-bottom: 0; }
+.progress-item__head { display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 6px; }
+.progress-item__head strong { font-weight: 700; }
+.progress-track { height: 7px; background: var(--abu-latar); border-radius: 999px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 999px; background: var(--biru-utama); }
+
+/* Rasio sumber laporan */
+.sumber-ratio { display: flex; gap: 18px; margin-top: 4px; }
+.sumber-ratio__item { flex: 1; }
+.sumber-ratio__head { display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:6px; font-weight:600; }
+
+/* Panel Saran & Masukan */
+.saran-panel {
+  background: var(--putih);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  margin-top: 24px;
+  overflow: hidden;
+}
+.saran-panel__head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 22px; cursor: pointer; font-weight: 700; font-size: 0.95rem;
+}
+.saran-panel__badge {
+  background: var(--merah-galat); color: #fff; font-size: 0.7rem; font-weight: 700;
+  padding: 2px 9px; border-radius: 999px; margin-left: 8px;
+}
+.saran-panel__body { border-top: 1px solid var(--garis); max-height: 340px; overflow-y: auto; }
+.saran-panel__body.tertutup { display: none; }
+.saran-item { padding: 14px 22px; border-bottom: 1px solid var(--garis); font-size: 0.85rem; }
+.saran-item:last-child { border-bottom: none; }
+.saran-item__tanggal { font-size: 0.72rem; color: var(--teks-muted); margin-bottom: 4px; }
+.saran-item__pesan { color: var(--teks-gelap); line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .insight-grid { grid-template-columns: 1fr; }
+}
+  background: var(--abu-latar);
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  color: var(--biru-utama);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .dashboard-toolbar { flex-direction: column; align-items: stretch; }
+}

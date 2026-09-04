@@ -1,0 +1,145 @@
+/* ===========================================================
+   PRIT KOTAS — auth.css
+   Styling untuk halaman login & register
+   =========================================================== */
+
+.auth-wrap {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: stretch;
+}
+
+.auth-visual {
+  flex: 1;
+  background: linear-gradient(160deg, var(--biru-utama) 0%, var(--biru-gelap) 60%, #062654 100%);
+  color: var(--putih);
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-visual::before {
+  content: '';
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(245, 124, 0, 0.18);
+  top: -80px; right: -80px;
+}
+.auth-visual::after {
+  content: '';
+  position: absolute;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(46, 125, 50, 0.22);
+  bottom: -60px; left: -40px;
+}
+
+.auth-visual h1 {
+  color: var(--putih);
+  font-size: 2rem;
+  max-width: 380px;
+  position: relative;
+  z-index: 1;
+}
+.auth-visual p {
+  color: rgba(255,255,255,0.82);
+  margin-top: 14px;
+  max-width: 380px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-visual .alur-mini {
+  margin-top: 40px;
+  display: flex;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+.auth-visual .alur-mini div {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  flex: 1;
+}
+.auth-visual .alur-mini strong { display: block; font-size: 0.95rem; margin-bottom: 4px; }
+
+.auth-form-side {
+  width: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: var(--putih);
+}
+
+.auth-box { width: 100%; max-width: 360px; }
+.auth-box h2 { font-size: 1.5rem; margin-bottom: 6px; }
+.auth-box .subjudul { color: var(--teks-muted); font-size: 0.92rem; margin-bottom: 26px; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--teks-gelap);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--garis);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  background: var(--abu-latar);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--biru-terang);
+  background: var(--putih);
+  outline: none;
+}
+.form-group small { color: var(--teks-muted); font-size: 0.78rem; }
+
+.form-radio-group { display: flex; gap: 10px; }
+.form-radio-group label {
+  flex: 1;
+  border: 1.5px solid var(--garis);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--teks-muted);
+}
+.form-radio-group input { display: none; }
+.form-radio-group input:checked + span { color: var(--biru-utama); }
+.form-radio-group label:has(input:checked) {
+  border-color: var(--biru-utama);
+  background: var(--biru-lembut);
+  color: var(--biru-utama);
+}
+
+.auth-footer-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--teks-muted);
+}
+
+@media (max-width: 900px) {
+  .auth-visual { display: none; }
+  .auth-form-side { width: 100%; }
+}

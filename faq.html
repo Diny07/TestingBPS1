@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | PRIT KOTAS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<link rel="stylesheet" href="landing.css">
+<style>
+  .faq-item { border-bottom: 1px solid var(--garis); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    width: 100%; text-align: left; background: none; border: none;
+    padding: 18px 4px; font-weight: 700; font-size: 0.95rem; color: var(--teks-gelap);
+    display: flex; justify-content: space-between; align-items: center; cursor: pointer;
+  }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.2s ease; font-size: 0.88rem; color: var(--teks-muted); line-height: 1.7; }
+  .faq-item.buka .faq-a { max-height: 300px; padding-bottom: 18px; }
+  .faq-item.buka .faq-q { color: var(--biru-utama); }
+  .faq-icon { transition: transform 0.2s ease; }
+  .faq-item.buka .faq-icon { transform: rotate(45deg); }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar__brand" style="text-decoration:none;">
+    <span class="logo-dot"></span> PRIT KOTAS
+  </a>
+  <div class="navbar__menu">
+    <a href="index.html">Beranda</a>
+    <a href="cek-status.html">Cek Status</a>
+    <a href="panduan.html">Panduan</a>
+    <a href="faq.html" class="nav-aktif">FAQ</a>
+    <a href="login.html" class="btn btn--primary btn--sm">Login Admin</a>
+  </div>
+</nav>
+
+<main class="section container" style="max-width:720px;">
+  <h1>Pertanyaan yang Sering Diajukan</h1>
+  <p class="section-subtitle">Jawaban singkat seputar layanan pengaduan PRIT KOTAS.</p>
+
+  <div class="card">
+    <div id="daftarFaq"></div>
+  </div>
+</main>
+
+<footer class="footer--lengkap">
+  <div class="container">
+    <div>
+      <div class="footer__brand">PRIT KOTAS</div>
+      <div class="footer__copy">&copy; 2026 BPS Kota Tasikmalaya.</div>
+    </div>
+    <div class="footer__links">
+      <a href="privasi.html">Kebijakan Privasi</a>
+      <a href="index.html#kontak">Kontak Kami</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const faq = [
+    { q: "Apakah saya harus membuat akun untuk mengajukan pengaduan?", a: "Tidak. Masyarakat dapat langsung mengisi form pengaduan tanpa perlu mendaftar atau login." },
+    { q: "Apakah identitas saya akan dirahasiakan?", a: "Ya. Identitas Anda sebagai whistleblower dirahasiakan sesuai ketentuan Whistle Blowing System BPS." },
+    { q: "Bagaimana cara mengecek status pengaduan saya?", a: "Buka halaman \"Cek Status\", lalu masukkan email yang sama seperti saat Anda mengajukan pengaduan." },
+    { q: "Apa yang terjadi jika saya kehilangan akses ke email yang saya daftarkan?", a: "Anda dapat menghubungi kami langsung lewat WhatsApp atau email resmi BPS yang tercantum di halaman Kontak, agar tim kami dapat membantu." },
+    { q: "Berapa lama waktu yang dibutuhkan untuk menindaklanjuti pengaduan?", a: "Waktu penanganan bervariasi tergantung kompleksitas laporan. Anda dapat memantau tahapannya (Menunggu, Diproses, Selesai) melalui halaman Cek Status." },
+    { q: "Bisakah saya melapor langsung ke kantor BPS tanpa mengisi form online?", a: "Bisa. Anda dapat datang langsung ke kantor BPS Kota Tasikmalaya, dan petugas kami akan mencatatkan laporan Anda ke dalam sistem." },
+    { q: "Jenis bukti apa saja yang bisa saya lampirkan?", a: "Anda dapat mengunggah hingga 10 berkas (foto, dokumen, atau rekaman) dengan ukuran maksimal 10MB per berkas." }
+  ];
+
+  document.getElementById("daftarFaq").innerHTML = faq.map((item, i) => `
+    <div class="faq-item" data-i="${i}">
+      <button class="faq-q">${item.q} <span class="faq-icon">+</span></button>
+      <div class="faq-a">${item.a}</div>
+    </div>`).join("");
+
+  document.querySelectorAll(".faq-item").forEach(el => {
+    el.querySelector(".faq-q").addEventListener("click", () => el.classList.toggle("buka"));
+  });
+</script>
+</body>
+</html>

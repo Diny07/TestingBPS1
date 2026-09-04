@@ -1,0 +1,218 @@
+/* ===========================================================
+   PRIT KOTAS — pengaduan.css
+   Gaya khusus halaman pengaduan.html (form publik)
+   =========================================================== */
+
+.subjudul-form { color: var(--teks-muted); font-size: 0.92rem; margin-bottom: 24px; }
+
+.form-radio-group--vertikal {
+  flex-direction: column;
+  gap: 8px;
+}
+.form-radio-group--vertikal label {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.kriteria-box {
+  background: var(--jingga-lembut);
+  border: 1px solid rgba(245, 124, 0, 0.25);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  color: var(--teks-gelap);
+}
+.kriteria-box strong { color: var(--jingga-proses); display: block; margin-bottom: 6px; }
+.kriteria-box ol { padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+
+.daftar-file { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.daftar-file__item {
+  background: var(--abu-latar);
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: var(--teks-muted);
+}
+
+.ikon-sukses { font-size: 3rem; margin-bottom: 8px; }
+
+.kode-tiket-box {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: var(--biru-lembut);
+  color: var(--biru-utama);
+  border: 2px dashed var(--biru-utama);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin: 18px 0;
+}
+
+.catatan-tiket { font-size: 0.82rem; color: var(--teks-muted); }
+
+/* ===========================================================
+   Sidebar Stepper Form (rancangan terbaru)
+   =========================================================== */
+.form-stepper-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.stepper-sidebar { position: sticky; top: 84px; }
+
+.stepper-vertikal { display: flex; flex-direction: column; }
+.stepper-vertikal__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--teks-muted);
+  cursor: pointer;
+  position: relative;
+}
+.stepper-vertikal__item::before {
+  content: '';
+  position: absolute;
+  left: 12px; top: 34px;
+  width: 2px; height: calc(100% - 10px);
+  background: var(--garis);
+}
+.stepper-vertikal__item:last-child::before { display: none; }
+.stepper-vertikal__no {
+  width: 26px; height: 26px; min-width: 26px;
+  border-radius: 50%;
+  background: var(--garis);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; font-weight: 700;
+  font-family: var(--font-heading);
+}
+.stepper-vertikal__item.aktif { color: var(--biru-utama); }
+.stepper-vertikal__item.aktif .stepper-vertikal__no { background: var(--biru-utama); }
+
+.stepper-content { display: flex; flex-direction: column; gap: 18px; }
+.form-section__title { font-size: 1.15rem; margin-bottom: 4px; }
+.form-section__desc { color: var(--teks-muted); font-size: 0.86rem; }
+.form-section__divider { border: none; border-top: 1px solid var(--garis); margin: 14px 0 18px; }
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+@media (max-width: 900px) {
+  .form-stepper-layout { grid-template-columns: 1fr; }
+  .stepper-sidebar { position: static; }
+  .stepper-vertikal { flex-direction: row; overflow-x: auto; gap: 18px; }
+  .stepper-vertikal__item::before { display: none; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* --- Badge & gerbang Hak-hak Pelapor (akuntabilitas) --- */
+.badge-antrian {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--jingga-lembut);
+  color: var(--jingga-proses);
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 7px 16px;
+  border-radius: 999px;
+}
+
+.checkbox-gate {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--abu-latar);
+  border: 1.5px solid var(--garis);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.87rem;
+  color: var(--teks-gelap);
+}
+.checkbox-gate input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+
+.nomor-antrian-box {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--biru-utama);
+  background: var(--biru-lembut);
+  border: 2px dashed var(--biru-utama);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin: 14px 0;
+}
+
+/* ===========================================================
+   Layout Sidebar Stepper (form pengaduan panjang, sesuai Image 2)
+   =========================================================== */
+.form-stepper-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.stepper-sidebar { position: sticky; top: 84px; }
+
+.stepper-vertikal { display: flex; flex-direction: column; gap: 4px; }
+.stepper-vertikal__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teks-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.stepper-vertikal__item:hover { background: var(--abu-latar); }
+.stepper-vertikal__item.aktif { color: var(--biru-utama); background: var(--biru-lembut); }
+.stepper-vertikal__no {
+  width: 24px; height: 24px; min-width: 24px;
+  border-radius: 50%;
+  background: var(--garis);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+}
+.stepper-vertikal__item.aktif .stepper-vertikal__no { background: var(--biru-utama); }
+
+.stepper-content { display: flex; flex-direction: column; gap: 20px; }
+
+.form-section { padding: 26px 28px; scroll-margin-top: 90px; }
+.form-section__title { font-size: 1.15rem; margin-bottom: 4px; }
+.form-section__desc { color: var(--teks-muted); font-size: 0.86rem; }
+.form-section__divider { border: none; border-top: 1px solid var(--garis); margin: 16px 0 20px; }
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.kategori-icon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 860px) {
+  .form-stepper-layout { grid-template-columns: 1fr; }
+  .stepper-sidebar { position: static; }
+  .stepper-vertikal { flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 4px; }
+  .stepper-vertikal__item { flex-shrink: 0; }
+  .form-grid-2, .kategori-icon-grid { grid-template-columns: 1fr; }
+  .form-section { padding: 20px; }
+}
